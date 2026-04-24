@@ -1,0 +1,201 @@
+/* style.css - Sobat Kamu Branding */
+
+:root {
+    --royal-blue: #0047AB;
+    --vibrant-yellow: #FFD700;
+    --white: #ffffff;
+    --light-gray: #f0f2f5;
+    --dark-text: #1a1a1a;
+    --soft-gray: #777777;
+    --whatsapp-green: #25D366;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Lexend', sans-serif;
+    background-color: var(--light-gray);
+    color: var(--dark-text);
+    line-height: 1.6;
+}
+
+/* --- Header Section --- */
+header {
+    background: var(--royal-blue);
+    background: linear-gradient(135deg, var(--royal-blue) 0%, #003380 100%);
+    color: white;
+    padding: 25px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-bottom: 4px solid var(--vibrant-yellow);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-weight: 300;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* --- Category & Layout --- */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-bottom: 120px;
+}
+
+.category-title {
+    margin: 25px 15px 15px;
+    font-size: 1.3rem;
+    color: var(--royal-blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.category-title::after {
+    content: "";
+    flex-grow: 1;
+    height: 2px;
+    background: var(--vibrant-yellow);
+    border-radius: 2px;
+}
+
+/* --- Menu Cards --- */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0 15px;
+}
+
+.menu-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.menu-card:active {
+    transform: scale(0.97);
+}
+
+.menu-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+.card-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.menu-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--dark-text);
+}
+
+.menu-price {
+    font-size: 1.1rem;
+    color: var(--royal-blue);
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+/* --- Buttons --- */
+.btn-add {
+    background-color: var(--vibrant-yellow);
+    color: var(--dark-text);
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #ccac00;
+    transition: 0.1s;
+}
+
+.btn-add:active {
+    box-shadow: 0 0 0 #ccac00;
+    transform: translateY(3px);
+}
+
+/* --- Floating Checkout Section --- */
+.checkout-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2000;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.total-label {
+    font-size: 0.75rem;
+    color: var(--soft-gray);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.total-price {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--royal-blue);
+}
+
+.btn-whatsapp {
+    background-color: var(--whatsapp-green);
+    color: white;
+    text-decoration: none;
+    padding: 14px 24px;
+    border-radius: 18px;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 400px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .menu-card img {
+        height: 200px;
+    }
+}
