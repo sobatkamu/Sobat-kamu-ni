@@ -1,44 +1,47 @@
-let cart = [];
-let total = 0;
-const phoneNumber = "6281958406093";
+let cart = {};
 
-function addToCart(name, price) {
-    cart.push({ name, price });
-    updateTotal();
-}
-
-function updateTotal() {
-    total = cart.reduce((sum, item) => sum + item.price, 0);
-    // Update tampilan harga di layar
-    document.querySelector('.total-price').innerText = "Rp " + total.toLocaleString('id-ID');
-    updateWhatsAppLink();
-}
-
-function updateWhatsAppLink() {
-    if (cart.length === 0) return;
-
-    let message = "Halo Sobat Kamu! 🍟🥤%0ASaya ingin memesan:%0A";
+function updateCart(name, price, change) {
+    if (!cart[name]) {
+        cart[name] = { price: price, qty: 0 };
+    }
     
-    // Kelompokkan item yang sama
-    const summary = cart.reduce((acc, item) => {
-        acc[item.name] = (acc[item.name] || 0) + 1;
-        return acc;
-    }, {});
+    cart[name].qty += change;
 
-    for (const [name, qty] of Object.entries(summary)) {
-        message += `- ${name} (${qty}x)%0A`;
+    if (cart[name].qty <= 0) {
+        cart[name].qty = 0;
+        delete cart[name];
     }
 
-    message += `%0ATotal: Rp ${total.toLocaleString('id-ID')}%0A%0AAlamat Delivery: [Isi Alamat Di Sini]`;
-    
-    const waLink = `https://wa.me/${phoneNumber}?text=${message}`;
-    document.getElementById('btn-wa').href = waLink;
+    // Update tampilan angka di kartu menu
+    // Ganti spasi dengan tanda hubung agar ID valid
+    const idName = name.replace(/\s+/g, '-');
+    const display = document.getElementById(`q-${idName}`);
+    if (display) display.innerText = cart[name] ? cart[name].qty : 0;
+
+    calculateTotal();
 }
 
-// Reset Keranjang (Opsional)
-function resetCart() {
-    cart = [];
-    total = 0;
-    updateTotal();
-    document.getElementById('btn-wa').href = "#";
+function calculateTotal() {
+    let total = 0;
+    for (let item in cart) {
+        total += cart[item].price * cart[item].qty;
+    }
+    document.getElementById('display-total').innerText = "Rp " + total.toLocaleString('id-ID');
+}
+
+function sendWhatsApp() {
+    let message = "Halo Sobat Kamu! 🍟🥤%0ASaya ingin pesan:%0A%0A";
+    let hasItems = false;
+
+    for (let item in cart) {
+        if (cart[item].qty > 0) {
+            message += `- ${item} (x${cart[item].qty})%0A`;
+            hasItems = true;
+        }
+    }
+
+    if (!hasItems) return alert("Pilih menu terlebih dahulu!");
+
+    message += `%0ATotal: ${document.getElementById('display-total').innerText}%0A%0AAlamat: [Tulis Alamat Di Sini]`;
+    window.open(`https://wa.me/6281958406093?text=${message}`, '_blank');
 }
