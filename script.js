@@ -1,5 +1,7 @@
 let cart = {};
 
+// --- LOGIKA KERANJANG & WHATSAPP ---
+
 function updateCart(name, price, change) {
     if (!cart[name]) {
         cart[name] = { price: price, qty: 0 };
@@ -13,7 +15,6 @@ function updateCart(name, price, change) {
     }
 
     // Update tampilan angka di kartu menu
-    // Ganti spasi dengan tanda hubung agar ID valid
     const idName = name.replace(/\s+/g, '-');
     const display = document.getElementById(`q-${idName}`);
     if (display) display.innerText = cart[name] ? cart[name].qty : 0;
@@ -45,3 +46,26 @@ function sendWhatsApp() {
     message += `%0ATotal: ${document.getElementById('display-total').innerText}%0A%0AAlamat: [Tulis Alamat Di Sini]`;
     window.open(`https://wa.me/6281958406093?text=${message}`, '_blank');
 }
+
+// --- LOGIKA MUSIK LATAR ---
+
+const audio = document.getElementById('bgMusic');
+const icon = document.getElementById('music-icon');
+
+function toggleMusic() {
+    if (audio.paused) {
+        audio.play();
+        icon.innerText = "🔊";
+    } else {
+        audio.pause();
+        icon.innerText = "🔈";
+    }
+}
+
+// Musik otomatis mulai saat user pertama kali berinteraksi (klik layar)
+document.addEventListener('click', function() {
+    if (audio.paused) {
+        audio.play();
+        icon.innerText = "🔊";
+    }
+}, { once: true });
