@@ -49,8 +49,8 @@ function sendWhatsApp() {
 
 // --- LOGIKA MUSIK LATAR ---
 
-const audio = document.getElementById('bgMusic');
-const icon = document.getElementById('music-icon');
+const audio = document.getElementById('Musik.mp3');
+const icon = document.getElementById('Musik.mp3');
 
 function toggleMusic() {
     if (audio.paused) {
